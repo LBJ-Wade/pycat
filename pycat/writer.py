@@ -10,19 +10,35 @@ class Writer(object):
     """Auxillary class."""
 
     def __init__(self, a: Any, log: str):
-        self.a = a
-        self.log = log
+        self._a = a
+        self._log = log
+
+    @property
+    def a(self):
+        return self._a
+
+    @property
+    def log(self):
+        return self._log
 
 
 class WriterGetter(object):
     """Auxillary class."""
 
     def __init__(self, process: Mapping[Any, Any], log: str):
-        self.process = process
-        self.log = log
+        self._process = process
+        self._log = log
 
     def __call__(self, a: Any) -> Writer:
         return Writer(self.process(a), self.log)
+
+    @property
+    def process(self):
+        return self._process
+
+    @property
+    def log(self):
+        return self._log
 
 
 class WriterMonoid(Monoid):
